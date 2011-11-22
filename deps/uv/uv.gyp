@@ -9,6 +9,9 @@
           'EIO_STACKSIZE=262144'
         ],
         'conditions': [
+          ['OS=="mac"', {
+            'defines': ['__DARWIN_64_BIT_INO_T=1'],
+          }],
           ['OS=="solaris"', {
             'cflags': ['-pthreads'],
             'ldlags': ['-pthreads'],
@@ -275,6 +278,7 @@
         'test/runner.h',
         'test/test-get-loadavg.c',
         'test/task.h',
+        'test/test-util.c',
         'test/test-async.c',
         'test/test-error.c',
         'test/test-callback-stack.c',
@@ -313,6 +317,7 @@
         'test/test-tcp-writealot.c',
         'test/test-threadpool.c',
         'test/test-mutexes.c',
+        'test/test-thread.c',
         'test/test-timer-again.c',
         'test/test-timer.c',
         'test/test-tty.c',
@@ -362,6 +367,7 @@
         'test/benchmark-pump.c',
         'test/benchmark-sizes.c',
         'test/benchmark-spawn.c',
+        'test/benchmark-thread.c',
         'test/benchmark-tcp-write-batch.c',
         'test/benchmark-udp-packet-storm.c',
         'test/dns-server.c',

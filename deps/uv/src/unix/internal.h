@@ -27,6 +27,10 @@
 
 #include <stddef.h> /* offsetof */
 
+#if __STRICT_ANSI__
+# define inline __inline
+#endif
+
 #undef HAVE_FUTIMES
 #undef HAVE_KQUEUE
 #undef HAVE_PORTS_FS
@@ -137,8 +141,6 @@ enum {
   UV_TCP_NODELAY   = 0x080,  /* Disable Nagle. */
   UV_TCP_KEEPALIVE = 0x100   /* Turn on keep-alive. */
 };
-
-size_t uv__strlcpy(char* dst, const char* src, size_t size);
 
 int uv__close(int fd);
 void uv__req_init(uv_req_t*);
