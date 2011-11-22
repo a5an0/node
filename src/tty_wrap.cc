@@ -123,7 +123,7 @@ class TTYWrap : StreamWrap {
     int r = uv_tty_get_winsize(&wrap->handle_, &width, &height);
 
     if (r) {
-      SetErrno(uv_last_error(uv_default_loop()));
+      SetErrno(uv_last_error(NODE_LOOP()));
       return v8::Undefined();
     }
 
@@ -142,7 +142,7 @@ class TTYWrap : StreamWrap {
     int r = uv_tty_set_mode(&wrap->handle_, args[0]->IsTrue());
 
     if (r) {
-      SetErrno(uv_last_error(uv_default_loop()));
+      SetErrno(uv_last_error(NODE_LOOP()));
     }
 
     return scope.Close(Integer::New(r));
@@ -168,7 +168,7 @@ class TTYWrap : StreamWrap {
 
   TTYWrap(Handle<Object> object, int fd, bool readable)
       : StreamWrap(object, (uv_stream_t*)&handle_) {
-    uv_tty_init(uv_default_loop(), &handle_, fd, readable);
+    uv_tty_init(NODE_LOOP(), &handle_, fd, readable);
   }
 
   uv_tty_t handle_;

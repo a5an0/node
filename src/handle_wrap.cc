@@ -68,7 +68,7 @@ Handle<Value> HandleWrap::Unref(const Arguments& args) {
   assert(wrap->unref == false);
 
   wrap->unref = true;
-  uv_unref(uv_default_loop());
+  uv_unref(NODE_LOOP());
 
   return v8::Undefined();
 }
@@ -83,7 +83,7 @@ Handle<Value> HandleWrap::Close(const Arguments& args) {
   uv_close(wrap->handle__, OnClose);
 
   if (wrap->unref) {
-    uv_ref(uv_default_loop());
+    uv_ref(NODE_LOOP());
     wrap->unref = false;
   }
 
